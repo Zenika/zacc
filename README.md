@@ -7,7 +7,11 @@ CLI to create and remove user accounts across Zenika IT systems.
 - Clone this repo
 - `npm install`
 - Copy `example.env` to `.env`
-- Fill `.env` with the required values (see Supported tools section below)
+- Fill `.env` with values for:
+  - `ZACC_COMMAND`: only `invite` to create accounts is supported as of now.
+  - `ZACC_DRY_RUN`: when `true`, Zacc does not send write requests to tools.
+- Fill `.env` with the required values for the tools you want to use (see
+  Supported tools section below)
 - `npm start`
 
 ## Supported tools
