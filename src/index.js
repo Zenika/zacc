@@ -106,10 +106,10 @@ async function createGoogleAccount() {
       clientSecret: ZACC_GOOGLE_OAUTH2_CLIENT_SECRET,
       redirectUri: ZACC_GOOGLE_OAUTH2_REDIRECT_URI,
     });
-    const password = hash(composeGooglePassword(new Date()));
+    const password = composeGooglePassword();
     const requestBody = {
       primaryEmail: ZACC_ACCOUNT_EMAIL,
-      password,
+      password: hash(password),
       hashFunction: "SHA-1",
       changePasswordAtNextLogin: true,
       name: {
@@ -141,14 +141,8 @@ function hash(content) {
   return hash.digest("hex");
 }
 
-/**
- *
- * @param {Date} date
- */
-function composeGooglePassword(date) {
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const year = String(date.getFullYear());
-  return `zenika${month}${year}`;
+function composeGooglePassword() {
+  return crypto.randomBytes(16).toString("hex");
 }
 
 async function inviteToGitHub() {
